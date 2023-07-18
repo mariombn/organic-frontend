@@ -1,6 +1,9 @@
 <template>
   <v-app id="inspire">
-    <div>
+    <div v-if="this.$store.state.user == null">
+      <login/>
+    </div>
+    <div v-else>
       <v-navigation-drawer
         expand-on-hover
         rail
@@ -9,8 +12,8 @@
         <v-list>
             <v-list-item
               prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-              title="Sandra Adams"
-              subtitle="sandra_a88@gmailcom"
+              :title="this.$store.state.user.name"
+              :subtitle="this.$store.state.user.email"
             ></v-list-item>
           </v-list>
 
@@ -36,7 +39,12 @@
 </template>
 
 <script>
+import Login from '@/components/Login.vue'
+
 export default {
+  components: {
+    Login,
+  },
   data() {
     return {
       message: 'Hello Vue 3!'

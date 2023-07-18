@@ -25,12 +25,12 @@
               <template v-slot:activator="{ props }">
                 <v-list-item
                   v-bind="props"
-                  prepend-icon="mdi-account-circle"
+                  :prepend-icon="item.icon"
                   :title="item.title"
                 ></v-list-item>
               </template>
 
-              <v-list-item v-for="(subitem, subkey) in item.child" :key="subkey" @click="goToRoute(subitem.route)" :title="subitem.title" value="myfiles"></v-list-item>
+              <v-list-item v-for="(subitem, subkey) in item.child" :key="subkey" @click="goToRoute(subitem.route)" :title="subitem.title"></v-list-item>
             </v-list-group>
 
 
@@ -63,33 +63,33 @@ export default {
       menu: [
         {
           "title": "Área do Usuário",
-          "icon": "mdi-account-circle",
+          "icon": "mdi-card-account-details-outline",
           "child": [
             {
               "title": "Sair",
-              "route": "user/logoff"
+              "route": "/user/logoff"
             },
             {
               "title": "Configurações",
-              "route": "user/settings"
+              "route": "/user/settings"
             },
           ]
         },
         {
           "title": "Financeiro",
-          "icon": "mdi-account-circle",
+          "icon": "mdi-finance",
           "child": [
             {
               "title": "Cadastrar Fatura",
-              "route": "finance/transaction/create"
+              "route": "/finance/transaction/create"
             },
             {
               "title": "Gerenciar Entradas e Saídas",
-              "route": "finance/input-output"
+              "route": "/finance/input-output"
             },
             {
               "title": "Resumo do Mês",
-              "route": "finance/resume"
+              "route": "/finance/resume"
             },
           ]
         },

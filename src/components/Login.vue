@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <loading :active="loading" />
     <v-main class="d-flex align-center justify-center min-vh-100">
       <v-card class="elevation-12" min-width="400">
         <v-card-title class="justify-center">
@@ -32,6 +33,7 @@ import api from '@/api'
 export default {
   data() {
     return {
+      loading: false,
       auth: {
         email: "",
         password: ""
@@ -40,12 +42,15 @@ export default {
   },
   methods: {
     submitForm() {
+      this.loading = true;
       api.post('auth/signin', this.auth)
         .then((res) => {
           this.$store.commit('setUser', res.data.data)
         })
         .catch((error) => {
           console.log(error)
+        }).finally(() => {
+          this.loading = false;
         });
     },
     register() {

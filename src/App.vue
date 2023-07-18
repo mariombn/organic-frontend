@@ -20,6 +20,19 @@
           <v-divider></v-divider>
 
           <v-list density="compact" nav>
+
+            <v-list-group value="Área do Usuário">
+              <template v-slot:activator="{ props }">
+                <v-list-item
+                  v-bind="props"
+                  prepend-icon="mdi-card-account-details-outline"
+                  title="Área do Usuário"
+                ></v-list-item>
+              </template>
+
+              <v-list-item @click="logoff()" title="Logoff"></v-list-item>
+              <v-list-item @click="goToRoute('/user/settings')" title="Configurações"></v-list-item>
+            </v-list-group>
             
             <v-list-group :value="item.title" v-for="(item, key) in menu" :key="key">
               <template v-slot:activator="{ props }">
@@ -62,20 +75,6 @@ export default {
     return {
       menu: [
         {
-          "title": "Área do Usuário",
-          "icon": "mdi-card-account-details-outline",
-          "child": [
-            {
-              "title": "Sair",
-              "route": "/user/logoff"
-            },
-            {
-              "title": "Configurações",
-              "route": "/user/settings"
-            },
-          ]
-        },
-        {
           "title": "Financeiro",
           "icon": "mdi-finance",
           "child": [
@@ -99,7 +98,10 @@ export default {
   methods: {
     goToRoute(route) {
       this.$router.push(route);
-    }
+    },
+    logoff() {
+      this.$store.commit('logoff')
+    },
   },
   mounted() {
     console.log('Component mounted')

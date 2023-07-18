@@ -12,11 +12,6 @@ const routes = [
         component: () => import('@/views/Home.vue'),
       },
       {
-        path: 'user/logoff',
-        name: 'Logoff',
-        component: () => import('@/views/user/Logoff.vue'),
-      },
-      {
         path: 'user/settings',
         name: 'Settings',
         component: () => import('@/views/user/Setting.vue'),

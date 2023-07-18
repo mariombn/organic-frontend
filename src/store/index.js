@@ -9,6 +9,9 @@ export default createStore({
     setUser(state, user) {
         state.user = user
     },
+    logoff(state) {
+      state.user = null
+    },
   },
   actions: {
     setUser({ commit }, user) {

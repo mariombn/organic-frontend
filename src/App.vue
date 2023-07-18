@@ -20,9 +20,22 @@
           <v-divider></v-divider>
 
           <v-list density="compact" nav>
-            <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
-            <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
-            <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
+            
+            <v-list-group :value="item.title" v-for="(item, key) in menu" :key="key">
+              <template v-slot:activator="{ props }">
+                <v-list-item
+                  v-bind="props"
+                  prepend-icon="mdi-account-circle"
+                  :title="item.title"
+                ></v-list-item>
+              </template>
+
+              <v-list-item v-for="(subitem, subkey) in item.child" :key="subkey" @click="goToRoute(subitem.route)" :title="subitem.title" value="myfiles"></v-list-item>
+            </v-list-group>
+
+
+
+
           </v-list>
 
       </v-navigation-drawer>
@@ -47,12 +60,45 @@ export default {
   },
   data() {
     return {
-      message: 'Hello Vue 3!'
+      menu: [
+        {
+          "title": "Área do Usuário",
+          "icon": "mdi-account-circle",
+          "child": [
+            {
+              "title": "Sair",
+              "route": "user/logoff"
+            },
+            {
+              "title": "Configurações",
+              "route": "user/settings"
+            },
+          ]
+        },
+        {
+          "title": "Financeiro",
+          "icon": "mdi-account-circle",
+          "child": [
+            {
+              "title": "Cadastrar Fatura",
+              "route": "finance/transaction/create"
+            },
+            {
+              "title": "Gerenciar Entradas e Saídas",
+              "route": "finance/input-output"
+            },
+            {
+              "title": "Resumo do Mês",
+              "route": "finance/resume"
+            },
+          ]
+        },
+      ],
     }
   },
   methods: {
-    updateMessage() {
-      this.message = 'Message updated!'
+    goToRoute(route) {
+      this.$router.push(route);
     }
   },
   mounted() {

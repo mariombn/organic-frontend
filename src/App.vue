@@ -54,7 +54,7 @@
       </v-navigation-drawer>
 
       <v-app-bar>
-        <v-toolbar-title>Organic {{ drawer }}</v-toolbar-title>
+        <v-toolbar-title>Organic</v-toolbar-title>
       </v-app-bar>
 
       <v-main>
